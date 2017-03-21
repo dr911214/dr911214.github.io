@@ -241,26 +241,6 @@
           </a>
         </li>
       
-        
-        <li class="menu-item menu-item-database">
-          <a href="/database" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
-            
-            数据库
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-linux">
-          <a href="/linux" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
-            
-            linux
-          </a>
-        </li>
-      
 
       
     </ul>
@@ -398,33 +378,14 @@
 
       
         
-          
-            <h1 id="Centos7-1-ssh端口修改"><a href="#Centos7-1-ssh端口修改" class="headerlink" title="Centos7.1 ssh端口修改"></a>Centos7.1 ssh端口修改</h1><p>最近项目上发觉服务器ssh 22端口经常被扫描，因此写了centos下修改ssh端口方法。</p>
-<h2 id="1-修改-etc-ssh-sshd-config文件"><a href="#1-修改-etc-ssh-sshd-config文件" class="headerlink" title="1.修改/etc/ssh/sshd_config文件"></a>1.修改/etc/ssh/sshd_config文件</h2><p>vi /etc/ssh/sshd_config</p>
-<p>Port 22 这行去掉#号，防止配置不好以后不能远程登录，还得去机房修改，等修改以后的端口能使用以后在注释掉；</p>
-<p>Port 8788 下面添加你想要的端口；</p>
-<h2 id="2-修改防火墙配置"><a href="#2-修改防火墙配置" class="headerlink" title="2.修改防火墙配置"></a>2.修改防火墙配置</h2><h3 id="2-1firewall防火墙"><a href="#2-1firewall防火墙" class="headerlink" title="2.1firewall防火墙"></a>2.1firewall防火墙</h3><p>firewall添加想要修改的ssh端口：<br>firewall-cmd –zone=public –add-port=20000/tcp –permanent (permanent是保存配置，不然下次重启以后这次修改无效)</p>
-<p>reload firewall：</p>
-<p>firewall-cmd –reload</p>
-<p>查看添加端口是否成功，如果添加成功则会显示yes，否则no</p>
-<p>firewall-cmd –zone=public –query-port=8788/tcp</p>
-<h3 id="2-2-iptables-防火墙"><a href="#2-2-iptables-防火墙" class="headerlink" title="2.2 iptables 防火墙"></a>2.2 iptables 防火墙</h3><p>注意网上有说卸载iptables方式，yum remove iptables，千万不要执行这个指令，否则你会悲剧</p>
-<p>先查看iptables原有规则:</p>
-<p>1、iptables -nvL</p>
-<p>2、more /etc/sysconfig/iptables</p>
-<p>3、加iptables规则</p>
-<p>-A INPUT -p tcp -m tcp –dport 22 -j ACCEPT</p>
-<p>-A INPUT -p tcp -m tcp –dport 8788 -j ACCEPT</p>
-<p>-A INPUT -p tcp -m state –state NEW -m tcp –dport 8788 -j ACCEPT</p>
-<h2 id="3-修改SELinux"><a href="#3-修改SELinux" class="headerlink" title="3.修改SELinux"></a>3.修改SELinux</h2><h3 id="3-1-安装"><a href="#3-1-安装" class="headerlink" title="3.1 安装"></a>3.1 安装</h3><p>yum install policycoreutils-python</p>
-<h3 id="3-2-查看当前SElinux-允许的ssh端口"><a href="#3-2-查看当前SElinux-允许的ssh端口" class="headerlink" title="3.2 查看当前SElinux 允许的ssh端口"></a>3.2 查看当前SElinux 允许的ssh端口</h3><p>semanage port -l | grep ssh</p>
-<p>添加你需要修改的端口:semanage port -a -t ssh_port_t -p tcp 8788</p>
-<p>然后确认一下是否添加进去:semanage port -l | grep ssh</p>
-<p>如果成功会输出:<br>ssh_port_t                    tcp    8788, 22</p>
-<h2 id="4-重启ssh服务"><a href="#4-重启ssh服务" class="headerlink" title="4.重启ssh服务"></a>4.重启ssh服务</h2><p>systemctl restart sshd.service</p>
-<h2 id="5-测试ssh是否能连上"><a href="#5-测试ssh是否能连上" class="headerlink" title="5.测试ssh是否能连上"></a>5.测试ssh是否能连上</h2><p>测试修改端口以后的ssh连接，如果成功则将step1里面的port 22 重新注释掉</p>
-
-          
+          <h1 id="Centos7-1-ssh端口修改"><a href="#Centos7-1-ssh端口修改" class="headerlink" title="Centos7.1 ssh端口修改"></a>Centos7.1 ssh端口修改</h1><p>最近项目上发觉服务器ssh 22端口经常被扫描，因此写了centos下修改ssh端口方法。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/03/21/Centos7.1ssh端口修改/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -665,10 +626,10 @@ var duoshuoQuery = {short_name:"dr911214"};
             
             
             <div class="site-state-item site-state-categories">
-              
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">1</span>
                 <span class="site-state-item-name">分类</span>
-              
+              </a>
             </div>
           
 
@@ -686,6 +647,20 @@ var duoshuoQuery = {short_name:"dr911214"};
         
 
         
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-block">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://xdlmr.github.io/" title="MrLi" target="_blank">MrLi</a>
+                </li>
+              
+            </ul>
+          </div>
         
 
         
