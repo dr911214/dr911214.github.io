@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Dr Blog">
 <meta property="og:description" content="#php oci操作oracle
 最近项目上用到php oci操作oracle,执行CURD操作时候，增改操作不成功，但是oci_execute($sql,oci_commit_on_success) 每次返回true，执行成功。代码如下：">
-<meta property="og:updated_time" content="2017-03-28T13:52:00.495Z">
+<meta property="og:updated_time" content="2017-03-29T15:49:18.456Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="php oci执行oracle语句问题">
 <meta name="twitter:description" content="#php oci操作oracle
@@ -383,7 +383,7 @@
 <p>之后写了一个查询方法，才发觉返回查询数据存在乱码，才锁定字符集编码问题，于是查看了oracle字符集编码</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">SQL&gt; select userenv(&apos;language&apos;) from dual;</div><div class="line"></div><div class="line">USERENV(&apos;LANGUAGE&apos;)</div><div class="line"></div><div class="line">----------------------------------------------------</div><div class="line"></div><div class="line">SIMPLIFIED CHINESE_CHINA.ZHS16GBK</div><div class="line"></div><div class="line"> </div><div class="line"></div><div class="line">SQL&gt;select userenv(‘language’) from dual;</div><div class="line"></div><div class="line">AMERICAN _ AMERICA. ZHS16GBK</div></pre></td></tr></table></figure>
 <p>最后通过修改服务器字符集编码解决此问题</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">echo $LANG</div><div class="line">export NLS_LANG=&quot;SIMPLIFIED CHINESE_CHINA.AL32UTF8&quot;</div><div class="line">AMERICAN_AMERICA.ZHS16GBK #设置Oracle客户端字符集，必须 与Oracle安装时设置的字符集保持一致，如：ZHS16GBK，否则出现数据导入导出 中文乱码问题</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">echo $LANG</div><div class="line">export NLS_LANG=&quot;SIMPLIFIED CHINESE_CHINA.AL32UTF8&quot;</div><div class="line">修改当前用户.bash_profile文件</div><div class="line">export NLS_LANG=&quot;SIMPLIFIED CHINESE_CHINA.AL32UTF8&quot;</div><div class="line">source .bash_profile 使得修改文件立即生效</div><div class="line"></div><div class="line">AMERICAN_AMERICA.ZHS16GBK #设置Oracle客户端字符集，必须 与Oracle安装时设置的字符集保持一致，如：ZHS16GBK，否则出现数据导入导出 中文乱码问题</div></pre></td></tr></table></figure>
 
       
     </div>
